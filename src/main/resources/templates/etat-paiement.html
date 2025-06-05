@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Résultat du Paiement</title>
+    <style>
+        body {
+            background: #fff;
+            color: #222;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #f8fafd;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 28px 28px 28px;
+            text-align: center;
+        }
+        h2 {
+            color: #0a2540;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        .success {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .fail {
+            color: #b91c1c;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .info {
+            color: #222;
+            margin-bottom: 8px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Résultat du Paiement</h2>
+    <div th:if="${etat} == 'ACCEPTED'" class="success">
+        Paiement accepté ! Merci pour votre achat.
+    </div>
+    <div th:if="${etat} != null and ${etat} != 'ACCEPTED'" class="fail">
+        Paiement échoué ou annulé.
+    </div>
+    <div class="info">
+        <strong>Statut :</strong> <span th:text="${etat} ?: 'Inconnu'"></span>
+    </div>
+    <div class="info">
+        <strong>Message :</strong> <span th:text="${message} ?: 'Aucun message'"></span>
+    </div>
+    <div class="info">
+        <strong>ID Transaction :</strong> <span th:text="${transactionId} ?: 'Non disponible'"></span>
+    </div>
+    <a class="back-link" th:href="@{/payer}">Retour à la page de paiement</a>
+</div>
+</body>
+</html>
